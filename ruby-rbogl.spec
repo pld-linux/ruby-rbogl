@@ -14,6 +14,7 @@ URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
 BuildRequires:	ruby-devel
 BuildRequires:	glut-devel
+BuildRequires:	sed >= 4.0
 Requires:	OpenGL
 Requires:	ruby
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -30,6 +31,7 @@ Modu³ OpenGL dla Ruby.
 %setup -q -n opengl
 %patch0 -p1
 %patch1 -p1
+sed -i -e "s#@LIBPATH@#/usr/X11R6/%{_lib}#g#" extconf.rb
 
 %build
 ruby extconf.rb
