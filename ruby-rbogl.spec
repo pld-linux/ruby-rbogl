@@ -13,6 +13,7 @@ Patch1:		%{name}-cpp.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
 BuildRequires:	ruby
+BuildRequires:	glut-devel
 Requires:	OpenGL
 Requires:	ruby
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
