@@ -1,0 +1,24 @@
+diff -ur opengl-orig/extconf.rb opengl/extconf.rb
+--- opengl-orig/extconf.rb	2001-11-30 22:24:58.000000000 -0700
++++ opengl/extconf.rb	2003-09-07 09:02:23.000000000 -0600
+@@ -43,8 +43,8 @@
+ 
+ $objs = ["glu.o", "ogl.o", "rbogl.o"]
+ #have_library("pthread", "pthread_create")
+-(have_library(gl_libname, nil) || have_library("Mesa"+gl_libname, nil)) &&
+-  (have_library(glu_libname, nil) ||  have_library("Mesa"+glu_libname, nil)) &&
++(have_library(gl_libname) || have_library("Mesa"+gl_libname)) &&
++  (have_library(glu_libname) ||  have_library("Mesa"+glu_libname)) &&
+   create_makefile("opengl")
+ if (FileTest.exist? "Makefile")
+     open("Makefile") {|f|
+@@ -64,7 +64,7 @@
+ have_library("Xi", "XAllowDeviceEvents") &&
+   have_library("Xext", "XMITMiscGetBugMode") &&
+   have_library("Xmu", "XmuAddCloseDisplayHook")
+-have_library(glut_libname, nil) &&
++have_library(glut_libname) &&
+   create_makefile("glut")
+ if (FileTest.exist? "Makefile")
+     open("Makefile") {|f|
+Only in opengl: extconf.rb~
