@@ -12,7 +12,7 @@ Patch0:		%{name}-extconf.patch
 Patch1:		%{name}-cpp.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
-BuildRequires:	ruby
+BuildRequires:	ruby-devel
 BuildRequires:	glut-devel
 Requires:	OpenGL
 Requires:	ruby
