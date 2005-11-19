@@ -1,4 +1,3 @@
-%define	ruby_sitearchdir	%(ruby -r rbconfig -e 'print Config::CONFIG["sitearchdir"]')
 Summary:	OpenGL module for Ruby
 Summary(pl):	Modu³ OpenGL dla Ruby
 Name:		ruby-rbogl
@@ -12,8 +11,9 @@ Patch0:		%{name}-extconf.patch
 Patch1:		%{name}-cpp.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
-BuildRequires:	ruby-devel
 BuildRequires:	glut-devel
+BuildRequires:	rpmbuild(macros) >= 1.263
+BuildRequires:	ruby-devel
 BuildRequires:	sed >= 4.0
 Requires:	OpenGL
 Requires:	ruby
@@ -31,7 +31,8 @@ Modu³ OpenGL dla Ruby.
 %setup -q -n opengl
 %patch0 -p1
 %patch1 -p1
-sed -i -e "s#@LIBPATH@#/usr/X11R6/%{_lib}#g#" extconf.rb
+# TODO: see r1.6
+sed -i -e 's#@LIBPATH@#/''usr/X11R6/%{_lib}#g#' extconf.rb
 
 %build
 ruby extconf.rb
