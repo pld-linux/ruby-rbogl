@@ -2,7 +2,7 @@ Summary:	OpenGL module for Ruby
 Summary(pl):	Modu³ OpenGL dla Ruby
 Name:		ruby-rbogl
 Version:	0.32b
-Release:	3
+Release:	4
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www2.giganet.net/~yoshi/rbogl-%{version}.tgz
@@ -16,7 +16,7 @@ BuildRequires:	rpmbuild(macros) >= 1.263
 BuildRequires:	ruby-devel
 BuildRequires:	sed >= 4.0
 Requires:	OpenGL
-Requires:	ruby
+Requires:	ruby-modules
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
