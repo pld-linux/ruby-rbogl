@@ -12,11 +12,11 @@ Patch1:		%{name}-cpp.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
 BuildRequires:	glut-devel
-BuildRequires:	rpmbuild(macros) >= 1.263
+BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	ruby-devel
 BuildRequires:	sed >= 4.0
 Requires:	OpenGL
-Requires:	ruby-modules
+%ruby_mod_ver_requires_eq
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
