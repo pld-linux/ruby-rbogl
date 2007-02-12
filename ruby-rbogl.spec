@@ -1,5 +1,5 @@
 Summary:	OpenGL module for Ruby
-Summary(pl.UTF-8):   Moduł OpenGL dla Ruby
+Summary(pl.UTF-8):	Moduł OpenGL dla Ruby
 Name:		ruby-rbogl
 Version:	0.32b
 Release:	5
