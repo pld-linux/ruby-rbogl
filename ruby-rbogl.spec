@@ -1,20 +1,25 @@
+%define pkgname rbogl
 Summary:	OpenGL module for Ruby
 Summary(pl.UTF-8):	Moduł OpenGL dla Ruby
-Name:		ruby-rbogl
-Version:	0.32b
-Release:	6
+Name:		ruby-%{pkgname}
+Version:	0.32g
+Release:	1
 License:	GPL
 Group:		Development/Languages
-Source0:	http://www2.giganet.net/~yoshi/rbogl-%{version}.tgz
-# Source0-md5:	94a689666a118b2ef10990183d5a308c
-Patch0:		%{name}-extconf.patch
-Patch1:		%{name}-cpp.patch
+Source0:	http://www2.giganet.net/~yoshi/%{pkgname}-%{version}.tar.gz
+# Source0-md5:	0832d08a87ebb16f6d4e30459a5019f0
+Patch0:		%{name}-ruby1.9.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
-BuildRequires:	rpmbuild(macros) >= 1.277
-BuildRequires:	ruby-devel >= 1:1.8.4-5
+BuildRequires:	rpmbuild(macros) >= 1.484
+BuildRequires:	ruby >= 1:1.8.6
+BuildRequires:	ruby-devel >= 1:1.8.6
+BuildRequires:	ruby-modules
 BuildRequires:	sed >= 4.0
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXi-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXmu-devel
 Requires:	OpenGL
 %{?ruby_mod_ver_requires_eq}
@@ -29,14 +34,12 @@ OpenGL module for Ruby.
 Moduł OpenGL dla Ruby.
 
 %prep
-%setup -q -n opengl
+%setup -q -n opengl-%{version}
 %patch0 -p1
-%patch1 -p1
-# TODO: see r1.6
-sed -i -e 's#@LIBPATH@#/''usr/X11R6/%{_lib}#g#' extconf.rb
 
 %build
 ruby extconf.rb
+
 %{__make} \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -fPIC"
