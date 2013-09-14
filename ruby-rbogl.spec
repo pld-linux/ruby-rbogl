@@ -3,7 +3,7 @@ Summary:	OpenGL module for Ruby
 Summary(pl.UTF-8):	Moduł OpenGL dla Ruby
 Name:		ruby-%{pkgname}
 Version:	0.32g
-Release:	1
+Release:	2
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www2.giganet.net/~yoshi/%{pkgname}-%{version}.tar.gz
@@ -12,17 +12,16 @@ Patch0:		%{name}-ruby1.9.patch
 URL:		http://www2.giganet.net/~yoshi/
 BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-glut-devel
-BuildRequires:	rpmbuild(macros) >= 1.484
-BuildRequires:	ruby >= 1:1.8.6
+BuildRequires:	rpm-rubyprov
+BuildRequires:	rpmbuild(macros) >= 1.665
 BuildRequires:	ruby-devel >= 1:1.8.6
 BuildRequires:	ruby-modules
 BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXmu-devel
 Requires:	OpenGL
-%{?ruby_mod_ver_requires_eq}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
@@ -38,7 +37,8 @@ Moduł OpenGL dla Ruby.
 %patch0 -p1
 
 %build
-ruby extconf.rb
+%{__ruby} extconf.rb \
+	--vendor
 
 %{__make} \
 	CC="%{__cc}" \
@@ -46,11 +46,11 @@ ruby extconf.rb
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{ruby_sitearchdir},%{_examplesdir}/%{name}-%{version}}
+%{__make} -j1 install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-install opengl.so $RPM_BUILD_ROOT%{ruby_sitearchdir}
-install glut.so $RPM_BUILD_ROOT%{ruby_sitearchdir}
-install sample/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a sample/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -58,5 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.EUC ChangeLog
-%attr(755,root,root) %{ruby_sitearchdir}/*.so
+%attr(755,root,root) %{ruby_vendorarchdir}/glut.so
+%attr(755,root,root) %{ruby_vendorarchdir}/opengl.so
 %{_examplesdir}/%{name}-%{version}
