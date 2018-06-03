@@ -3,7 +3,7 @@ Summary:	OpenGL module for Ruby
 Summary(pl.UTF-8):	Moduł OpenGL dla Ruby
 Name:		ruby-%{pkgname}
 Version:	0.32g
-Release:	5
+Release:	6
 License:	GPL
 Group:		Development/Languages
 Source0:	http://www2.giganet.net/~yoshi/%{pkgname}-%{version}.tar.gz
